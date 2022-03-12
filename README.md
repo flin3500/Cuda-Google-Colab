@@ -28,19 +28,25 @@ Runtime > Change runtime type > Setting the Hardware accelerator to GPU > Save
 #include<stdio.h>
 __global__ void hello(void)
 {
-  printf("GPU: Hello!\n");
+    printf("GPU: Hello!\n");
 }
 int main(int argc,char **argv)
 {
-  printf("CPU: Hello!\n");
-  hello<<<1,10>>>();
-  cudaDeviceReset();
-  return 0;
+    printf("CPU: Hello!\n");
+    hello<<<1,10>>>();
+    cudaDeviceReset();
+    return 0;
 }
 ```  
-2. Compile the code **The compile flag is important, it is depends on your device, K80 is 37. If you do not have that, the kernel code will not work. I was stuck here for a while**
+2. Compile the code (**It depends on the device, K80 supports CUDA 5 to CUDA 10. But the Google Colab has CUDA11 as default. There are two ways to fix that. First is adding flag, 37 is for K80. Second is create a soft link to make the CUDA11 to CUDA10**)
 ```bash
+# Method 1
 !nvcc -arch=sm_37 -gencode=arch=compute_37,code=sm_37 hello.cu -o hello
+
+# Method 2
+!rm -rf /usr/local/cuda
+!ln -s /usr/local/cuda-10.1 /usr/local/cuda
+!nvcc hello.cu -o hello
 ```  
 3. Run the program
 ```bash
