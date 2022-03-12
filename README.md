@@ -2,7 +2,7 @@
 The cuda code is mainly for nvidia hardware device. In this repo, I will show how to run your cuda c/cpp code on the google colab platform for free.
 
 ## How to run the cuda code on Google Colab
-You can follow the steps below. The specific code is inside the example.ipynb file.  
+You can follow the steps below. The specific code is inside the [example.ipynb](./example.ipynb) file.  
 ### a. Setting the environment
 1. The Google Colab is initialized with no hardware as default. In that case, we need to first set our hardware to GPU.  
 ```
@@ -38,7 +38,8 @@ int main(int argc,char **argv)
   return 0;
 }
 ```  
-2. Compile the code (**The compile flag is important, it is depends on your device, K80 is 37**)
+2. Compile the code  
+**The compile flag is important, it is depends on your device, K80 is 37. If you do not have that, the kernel code will not work.**
 ```bash
 !nvcc -arch=sm_37 -gencode=arch=compute_37,code=sm_37 hello.cu -o hello
 ```  
@@ -47,3 +48,6 @@ int main(int argc,char **argv)
 !./hello
 ```  
 If you see 1 cpu hello and 10 gpu hello in the output. The program is working well.
+
+## Reference
+1. [Cuda not working on Google Colab](http://wiki.alcidesfonseca.com/blog/cuda-not-working-google-collab/)
