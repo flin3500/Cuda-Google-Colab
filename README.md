@@ -38,8 +38,7 @@ int main(int argc,char **argv)
   return 0;
 }
 ```  
-2. Compile the code  
-**The compile flag is important, it is depends on your device, K80 is 37. If you do not have that, the kernel code will not work.**
+2. Compile the code **The compile flag is important, it is depends on your device, K80 is 37. If you do not have that, the kernel code will not work. I was stuck here for a while**
 ```bash
 !nvcc -arch=sm_37 -gencode=arch=compute_37,code=sm_37 hello.cu -o hello
 ```  
