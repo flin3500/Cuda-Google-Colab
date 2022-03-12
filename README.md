@@ -46,3 +46,4 @@ int main(int argc,char **argv)
 ```bash
 !./hello
 ```  
+If you see 1 cpu hello and 10 gpu hello in the output. The program is working well.
