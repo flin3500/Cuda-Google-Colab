@@ -1,4 +1,4 @@
-# Cuda on Google Colab
+# CUDA on Google Colab
 The cuda code is mainly for nvidia hardware device. In this repo, I will show how to run your cuda c/cpp code on the google colab platform for free.
 
 ## How to run the cuda code on Google Colab
