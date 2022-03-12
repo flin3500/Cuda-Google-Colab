@@ -1,9 +1,48 @@
 # CUDA ON GOOGLE COLAB
 The cuda code is mainly for nvidia hardware device. In this repo, I will show how to run your cuda c/cpp code on the google colab platform for free.
 
-
-## Setting the Environment
-1. The
-```cuda
-int main(){}
+## How to Run the cuda code on Google Colab
+You can follow the steps below. The specific code is inside the example.ipynb file.  
+### a. Setting the Environment
+1. The Google Colab is initialized with no hardware as default. In that case, we need to first set our hardware to GPU.  
 ```
+Runtime > Change runtime type > Setting the Hardware accelerator to GPU > Save
+```
+2. If we need to use the cuda, we have to have cuda tookit. The Google Colab has already installed that. We can use the following code to verify that. (The output will show the file under the /usr/local, which has several different version of cuda.)  
+```bash
+!ls /usr/local/
+```  
+3. Then, we need to verify if the nvcc command is there in the $PATH environment to use. We can use the following code to verify that. It will show the full path of nvcc command.  
+```bash
+!which nvcc
+``` 
+4. The cuda driver is also important for us to use the cuda. The Google Colab also has already installed that. We can use the following code to verify that. It will show the property of the nvidia card, which means the driver is working properly.**Remember the NVIDIA device you are using now, in my case, I use K80**  
+```bash
+!nvidia-smi
+```
+### b. Write, Compile and Run the program.
+1. Write cuda code  
+```cuda
+%%writefile hello.cu
+
+#include<stdio.h>
+__global__ void hello(void)
+{
+  printf("GPU: Hello!\n");
+}
+int main(int argc,char **argv)
+{
+  printf("CPU: Hello!\n");
+  hello<<<1,10>>>();
+  cudaDeviceReset();
+  return 0;
+}
+```  
+2. Compile the code (**The compile flag is important, it is depends on your device, K80 is 37**)
+```bash
+!nvcc -arch=sm_37 -gencode=arch=compute_37,code=sm_37 hello.cu -o hello
+```  
+3. Run the program
+```bash
+!./hello
+```  
