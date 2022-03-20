@@ -38,7 +38,7 @@ int main(int argc,char **argv)
     return 0;
 }
 ```  
-2. Compile the code (**It depends on the device, K80 supports CUDA 5 to CUDA 10. But the Google Colab has CUDA11 as default. There are two ways to fix that. First is adding flag, 37 is for K80. Second is create a soft link to make the CUDA11 to CUDA10**)
+2. Compile the code (**It depends on the device, K80 use the Kepler arch which only supports CUDA 5 to CUDA 10. But the Google Colab has CUDA 11 as default. There are two ways to fix that. First is adding flag, sm_37 is for K80. Second is create a soft link to make the CUDA11 to CUDA10**)
 ```bash
 # Method 1
 !nvcc -arch=sm_37 -gencode=arch=compute_37,code=sm_37 hello.cu -o hello
