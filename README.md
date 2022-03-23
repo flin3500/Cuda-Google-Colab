@@ -39,7 +39,8 @@ int main(int argc,char **argv)
 }
 ```  
 2. Compile the code (**It depends on the device, K80 use the Kepler arch which only supports CUDA 5 to CUDA 10. But the Google Colab has CUDA 11 as default. There are two ways to fix that. First is adding flag, sm_37 is for K80. Second is create a soft link to make the CUDA11 to CUDA10**)  
-[NVIDIA arch](https://arnon.dk/matching-sm-architectures-arch-and-gencode-for-various-nvidia-cards/)
+[NVIDIA arch](https://arnon.dk/matching-sm-architectures-arch-and-gencode-for-various-nvidia-cards/)  
+[GPU Compute Capability](https://developer.nvidia.com/cuda-gpus#compute)
 ```bash
 # Method 1
 !nvcc -arch=sm_37 -gencode=arch=compute_37,code=sm_37 hello.cu -o hello
@@ -58,3 +59,4 @@ If you see 1 cpu hello and 10 gpu hello in the output. The program is working we
 ## Reference
 1. [Cuda not working on Google Colab](http://wiki.alcidesfonseca.com/blog/cuda-not-working-google-collab/)
 2. [Matching CUDA arch and CUDA gencode for various NVIDIA architectures](https://arnon.dk/matching-sm-architectures-arch-and-gencode-for-various-nvidia-cards/)
+3. [GPU Compute Capability](https://developer.nvidia.com/cuda-gpus#compute)
